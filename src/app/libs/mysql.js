@@ -10,3 +10,5 @@ export const connection = mysql.createPool({
     rejectUnauthorized: true 
   }
 });
+
+export default connection;
