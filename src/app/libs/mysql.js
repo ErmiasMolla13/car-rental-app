@@ -5,10 +5,14 @@ const pool = mysql.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  port: process.env.DB_PORT || 3306,
+  port: parseInt(process.env.DB_PORT) || 3306,
   ssl: {
-    rejectUnauthorized: true // Securely connects to cloud databases like Aiven
-  }
+    // This tells Vercel to trust the Aiven certificate chain
+    rejectUnauthorized: false 
+  },
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
 export default pool;
